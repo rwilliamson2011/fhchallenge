@@ -1,6 +1,6 @@
 rules:
 
-* id: direct-record-return-without-authorization
+- id: direct-record-return-without-authorization
 
   message: >
   Record retrieved from storage and returned directly.
@@ -10,11 +10,11 @@ rules:
 
   languages:
 
-  * python
+  - python
 
   patterns:
 
-  * pattern: |
+  - pattern: |
     $RECORD = db.get_record($ID)
     ...
     return $RECORD
