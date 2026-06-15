@@ -1,24 +1,21 @@
 rules:
+  - id: direct-record-return
 
-- id: direct-record-return-without-authorization
+    message: >
+      Record retrieved by identifier and returned directly.
+      Verify ownership or authorization before returning.
 
-  message: >
-  Record retrieved from storage and returned directly.
-  Verify ownership or authorization before returning.
+    severity: ERROR
 
-  severity: ERROR
+    languages:
+      - python
 
-  languages:
+    pattern: |
+      $RECORD = db.get_record($ID)
+      ...
+      return $RECORD
 
-  - python
-
-  patterns:
-
-  - pattern: |
-    $RECORD = db.get_record($ID)
-    ...
-    return $RECORD
-
-  metadata:
-  category: security
-  vulnerability: broken-access-control
+    metadata:
+      category: security
+      vulnerability: broken-access-control
+      confidence: medium
