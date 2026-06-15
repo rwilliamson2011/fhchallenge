@@ -1,0 +1,24 @@
+rules:
+  - id: resource-access-without-ownership-check
+
+    message: >
+      Resource retrieved directly from user-controlled ID.
+      Verify ownership or authorization before returning.
+
+    severity: WARNING
+
+    languages:
+      - python
+
+    patterns:
+      - pattern-either:
+          - pattern: |
+              $OBJ = get_user($ID)
+          - pattern: |
+              $OBJ = get_account($ID)
+          - pattern: |
+              $OBJ = get_order($ID)
+
+    metadata:
+      category: security
+      confidence: medium
