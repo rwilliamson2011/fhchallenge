@@ -1,24 +1,28 @@
 rules:
-  - id: resource-access-without-ownership-check
 
-    message: >
-      Resource retrieved directly from user-controlled ID.
-      Verify ownership or authorization before returning.
+* id: missing-record-authorization-check
 
-    severity: WARNING
+  message: >
+  Resource is retrieved using a client-supplied identifier and returned
+  without an ownership or authorization check. Review for broken access
+  control.
 
-    languages:
-      - python
+  severity: ERROR
 
-    patterns:
-      - pattern-either:
-          - pattern: |
-              $OBJ = get_user($ID)
-          - pattern: |
-              $OBJ = get_account($ID)
-          - pattern: |
-              $OBJ = get_order($ID)
+  languages:
 
-    metadata:
-      category: security
-      confidence: medium
+  * python
+
+  patterns:
+
+  * pattern-inside: |
+    def $FUNC(...):
+    ...
+    $RECORD = db.get_record($ID)
+    ...
+    return $RECORD
+
+  metadata:
+  category: security
+  vulnerability: broken-access-control
+  confidence: medium
