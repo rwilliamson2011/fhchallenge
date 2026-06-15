@@ -6,11 +6,11 @@ Use this template for the `ai-security-review.md` deliverable described in the c
 
 Describe what context the reviewer should receive.
 
-- Diff.
+- Pull Request Diff.
+- Changed files
 - Route map.
 - Auth model notes.
 - Scanner findings.
-- Any other context you think is necessary.
 
 ## Outputs
 
@@ -21,6 +21,7 @@ Describe the reviewer's output format.
 - Confidence.
 - Suggested owner.
 - Block/comment/escalate decision.
+- Remediation suggestion.
 
 ## Guardrails
 
