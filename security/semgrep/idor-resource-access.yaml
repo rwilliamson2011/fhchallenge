@@ -1,11 +1,10 @@
 rules:
 
-* id: missing-record-authorization-check
+* id: direct-record-return-without-authorization
 
   message: >
-  Resource is retrieved using a client-supplied identifier and returned
-  without an ownership or authorization check. Review for broken access
-  control.
+  Record retrieved from storage and returned directly.
+  Verify ownership or authorization before returning.
 
   severity: ERROR
 
@@ -15,9 +14,7 @@ rules:
 
   patterns:
 
-  * pattern-inside: |
-    def $FUNC(...):
-    ...
+  * pattern: |
     $RECORD = db.get_record($ID)
     ...
     return $RECORD
@@ -25,4 +22,3 @@ rules:
   metadata:
   category: security
   vulnerability: broken-access-control
-  confidence: medium
